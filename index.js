@@ -3,6 +3,7 @@ import Lab5 from "./Lab5/index.js";
 import cors from "cors";
 import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
+import PiazzaRoutes from "./Kambaz/Posts/routes.js";
 import "dotenv/config";
 import session from "express-session";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
@@ -39,5 +40,6 @@ UserRoutes(app);
 CourseRoutes(app)
 ModuleRoutes(app);
 Lab5(app);
-Hello(app)
+Hello(app);
+PiazzaRoutes(app);
 app.listen(process.env.PORT || 4000);
