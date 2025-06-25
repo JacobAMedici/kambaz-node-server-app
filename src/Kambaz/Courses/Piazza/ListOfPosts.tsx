@@ -104,9 +104,9 @@ export default function ListOfPosts() {
                         </div>
                     }{post.summary}</div>
                     <div
-                        className="post-content"
-                        dangerouslySetInnerHTML={{__html: post.content}}
-                    />
+                        className="post-content">
+                        {post.content}
+                    </div>
                 </div>
                 <div className="wd-grid-col-lop-right post-date">
                     {formatSmartDate(post.dateTime)}

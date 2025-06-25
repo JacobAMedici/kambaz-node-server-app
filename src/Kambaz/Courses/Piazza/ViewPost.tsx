@@ -116,8 +116,9 @@ export default function ViewPost() {
                         </ul>
                     </div>
                 </div>
-                <div className="wd-piazza-view-post-content"
-                     dangerouslySetInnerHTML={{__html: post.content}}/>
+                <div className="wd-piazza-view-post-content">
+                    {post.content}
+                </div>
                 {folderNames.map((name, index) => (
                     <span key={index} className="folder-badge me-2">
                     {name}

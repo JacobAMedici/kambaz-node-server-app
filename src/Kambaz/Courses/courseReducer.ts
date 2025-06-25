@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {v4 as uuidv4} from "uuid";
 import * as courseClient from "../Courses/client";
 import * as userClient from "../Account/client";
+import * as piazzaClient from "./Piazza/client.ts";
 
 type Course = {
     _id: string;
@@ -48,6 +49,15 @@ export const addCourseAsync = (course: any, userId: string) => async (dispatch: 
         const newCourse = await courseClient.createCourse(course);
         await dispatch(addCourse(newCourse));
         await dispatch(enrollAsync(userId, newCourse._id));
+        const defaultFolders = ["hw1", "hw2", "hw3", "hw4", "hw5", "hw6", "exam1", "logistics", "office hours"];
+        for (const content of defaultFolders) {
+            const folder = {
+                _id: uuidv4(),
+                name: content,
+                cid: newCourse._id,
+            };
+            await piazzaClient.addFolder(folder);
+        }
     } catch (e) {
         console.error("Failed to add course", e);
     }

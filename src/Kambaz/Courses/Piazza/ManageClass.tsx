@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {v4 as uuidv4} from "uuid";
 import {FaPencil} from "react-icons/fa6";
 import {FaTrash} from "react-icons/fa";
+// import * as client from "../client.ts";
 
 export default function ManageClass() {
     const {cid, setting} = useParams();
@@ -18,6 +19,23 @@ export default function ManageClass() {
     const [selectedFolders, setSelectedFolders] = useState<Set<string>>(new Set());
     const {currentUser} = useSelector((state: any) => state.accountReducer);
     const navigate = useNavigate();
+
+    // const addDefaultFolders = async () => {
+    //     const classes = await client.fetchAllCourses();
+    //     const defaultFolders = ["hw1", "hw2", "hw3", "hw4", "hw5", "hw6", "exam1", "logistics", "office hours"];
+    //
+    //     for (const course of classes) {
+    //         for (const content of defaultFolders) {
+    //             const folder = {
+    //                 _id: uuidv4(),
+    //                 name: content,
+    //                 cid: course._id,
+    //             };
+    //             await piazzaClient.addFolder(folder);
+    //         }
+    //     }
+    // };
+
 
     // I go the structure for this from ChatGPT
     const navItems = [
@@ -73,6 +91,11 @@ export default function ManageClass() {
 
     return (
         <div id="wd-piazza-manage_class">
+
+            {/*<button className="btn btn-primary" onClick={addDefaultFolders}>*/}
+            {/*    Add Default Folders*/}
+            {/*</button>*/}
+
             {/* Navbar*/}
             <div className="settings-tab-bar">
                 {navItems.map((item) => (
@@ -111,8 +134,10 @@ export default function ManageClass() {
                         />
                         <Button
                             variant="primary"
-                            onClick={() => {addFolderAsync(folderName)
-                                getFoldersAsync()}}
+                            onClick={() => {
+                                addFolderAsync(folderName)
+                                getFoldersAsync()
+                            }}
                         >
                             Add folder
                         </Button>
@@ -160,7 +185,9 @@ export default function ManageClass() {
                                     </div>}
                             </div>
                             <div className="wd-grid-col-edit">
-                                <Button variant="secondary" onClick={() => {dispatch(editFolder(folder._id))}}>
+                                <Button variant="secondary" onClick={() => {
+                                    dispatch(editFolder(folder._id))
+                                }}>
                                     <FaPencil className="me-2 wd-icon"/>
                                     Edit
                                 </Button>

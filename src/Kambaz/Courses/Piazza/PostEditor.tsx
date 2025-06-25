@@ -301,8 +301,15 @@ export default function PostEditor() {
                     </div>
                     <div className="wd-grid-col-editor-right">
                         <div className="mb-3">
+                            <textarea
+                                id="details"
+                                name="details"
+                                className="form-control"
+                                rows={5}
+                                placeholder="Enter details of your post here"
+                                onChange={(e) => setDetails(e.target.value)}
+                            />
                         </div>
-
                     </div>
                 </div>
 
