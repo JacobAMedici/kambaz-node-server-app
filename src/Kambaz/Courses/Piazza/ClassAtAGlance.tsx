@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
 import * as postClient from "./client.ts";
-import {setClassPosts} from "./postReducer.ts";
+import {setUserPosts} from "./postReducer.ts";
 import {useEffect, useState} from "react";
 import {FaCheckSquare} from "react-icons/fa";
 import {BsExclamationSquareFill} from "react-icons/bs";
@@ -9,12 +9,12 @@ import {findUsersForCourse} from "../client.ts";
 
 
 export default function ClassAtAGlance() {
-    const {posts} = useSelector((state: any) => state.postReducer);
+    const {userPosts} = useSelector((state: any) => state.postReducer);
     const [allPosts, setAllPosts] = useState([]);
     const {cid} = useParams();
     const {currentUser} = useSelector((state: any) => state.accountReducer);
     const dispatch = useDispatch();
-    const [numberofStudents, setNumberOfStudents] = useState(0);
+    const [numberOfStudents, setNumberOfStudents] = useState(0);
 
     const filterPostsByCourseId = async () => {
         const classPosts = await postClient.getPostsByCourseId(cid as string);
@@ -27,16 +27,16 @@ export default function ClassAtAGlance() {
                 (post.type === "QUESTION" || post.type === "NOTE")
         );
 
-        dispatch(setClassPosts(visiblePosts));
+        dispatch(setUserPosts(visiblePosts));
     };
 
 
     const getUnreadCount = () => {
-        return posts.filter((post: any) => !post.readBy.includes(currentUser._id)).length;
+        return userPosts.filter((post: any) => !post.readBy.includes(currentUser._id)).length;
     }
 
     const getUnansweredCount = () => {
-        return posts.filter((post: any) => post.responses.length === 0 && post.type === "QUESTION").length;
+        return userPosts.filter((post: any) => post.responses.length === 0 && post.type === "QUESTION").length;
     }
 
     const getNumberOfStudents = async () => {
@@ -106,10 +106,10 @@ export default function ClassAtAGlance() {
                     <div className="right-col">
                         <div className="right-inner-col right-values">
                             <div className="value">active instructor license</div>
-                            <div className="value">{posts.length}</div>
+                            <div className="value">{userPosts.length}</div>
                             <div className="value">{getInstructorResponses()}</div>
                             <div className="value">{getStudentResponses()}</div>
-                            <div className="value">{numberofStudents}</div>
+                            <div className="value">{numberOfStudents}</div>
                         </div>
                         <div className="right-inner-col">
                             <div className="label">license status</div>

@@ -10,10 +10,21 @@ import {addPost, updatePost} from "./postReducer.ts";
 import {v4 as uuidv4} from "uuid";
 import type {Post} from "./ViewPost.tsx";
 
-export default function PostEditor({ post }: { post: Post | null}) {
+export default function PostEditor({
+                                       post,
+                                       type = "TYPICAL",
+                                       parentPost = null,
+                                       onPostSubmit = () => null
+                                   }: {
+    post: Post | null;
+    type?: string;
+    parentPost?: Post | null;
+    onPostSubmit?: () => void;
+}) {
+
     const {cid} = useParams();
     const [students, setStudents] = useState([]);
-    const [postType, setPostType] = useState("QUESTION");
+    const [postType, setPostType] = useState(type === "TYPICAL" ? "QUESTION" : type);
     const [postToAll, setPostToAll] = useState(true);
     const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
@@ -72,10 +83,11 @@ export default function PostEditor({ post }: { post: Post | null}) {
 
     const createPost = async () => {
         const missing = [];
-        if (selectedFolders.length === 0) missing.push("Folders");
-        if (!summary.trim()) missing.push("Summary");
         if (!details.trim()) missing.push("Details");
-
+        if (type === "TYPICAL") {
+            if (selectedFolders.length === 0) missing.push("Folders");
+            if (!summary.trim()) missing.push("Summary");
+        }
         if (missing.length > 0) {
             // I wasn't sure how to concatenate it, so I asked ChatGPT
             setModalMessage(`Please complete the following required fields:\n ${missing.join(", ")}`);
@@ -83,9 +95,9 @@ export default function PostEditor({ post }: { post: Post | null}) {
             return;
         }
 
-        const post = {
+        const newPostData = {
             _id: uuidv4(),
-            type: postType,
+            type: type === "TYPICAL" ? postType : type,
             summary: summary,
             user: currentUser._id,
             userRole: currentUser.role,
@@ -95,21 +107,41 @@ export default function PostEditor({ post }: { post: Post | null}) {
             postTo: postToAll ? [] : [...selectedStudents, currentUser._id],
             dateTime: new Date().toISOString(),
             responses: [],
-            readBy: []
+            readBy: [],
         };
 
-        const newPost = await piazzaClient.createPost(post);
-        dispatch(addPost(newPost));
-        navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
+        const newPost = await piazzaClient.createPost(newPostData);
+        if (type === "TYPICAL") {
+            dispatch(addPost(newPost));
+        }
+        if (parentPost) {
+            const updatedParentPost = {
+                ...parentPost,
+                responses: [...parentPost.responses, newPost._id]
+            }
+            console.log(updatedParentPost)
+            const result = await piazzaClient.updatePost(updatedParentPost);
+            dispatch(updatePost(result));
+        }
+        if (onPostSubmit) {
+            onPostSubmit();
+        }
+        if (!parentPost) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${newPost._id}`);
+        } else {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
+        }
     };
 
     const updateExistingPost = async () => {
         const missing = [];
-        if (selectedFolders.length === 0) missing.push("Folders");
-        if (!summary.trim()) missing.push("Summary");
         if (!details.trim()) missing.push("Details");
-
+        if (type === "TYPICAL") {
+            if (selectedFolders.length === 0) missing.push("Folders");
+            if (!summary.trim()) missing.push("Summary");
+        }
         if (missing.length > 0) {
+            // I wasn't sure how to concatenate it, so I asked ChatGPT
             setModalMessage(`Please complete the following required fields:\n ${missing.join(", ")}`);
             setShowModal(true);
             return;
@@ -125,8 +157,17 @@ export default function PostEditor({ post }: { post: Post | null}) {
         };
 
         const result = await piazzaClient.updatePost(updated);
-        dispatch(updatePost(result));
-        navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
+        if (type === "TYPICAL") {
+            dispatch(updatePost(result));
+        }
+        if (onPostSubmit) {
+            onPostSubmit();
+        }
+        if (!parentPost) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${result._id}`);
+        } else {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
+        }
     };
 
 
@@ -157,181 +198,185 @@ export default function PostEditor({ post }: { post: Post | null}) {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">Missing Fields</h5>
-                                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                                <button type="button" className="btn-close"
+                                        onClick={() => setShowModal(false)}></button>
                             </div>
                             <div className="modal-body">
                                 <p>{modalMessage}</p>
                             </div>
                             <div className="modal-footer">
-                                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                <button className="btn btn-secondary"
+                                        onClick={() => setShowModal(false)}>Close
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
             <div className="wd-piazza-editor-content">
-                <div
-                    id="wd-piazza-editor-post-type"
-                    className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
-                >
-                    <div className="wd-grid-col-edit-right text-end me-3">
-                        Post Type*
-                    </div>
-                    <div className="wd-grid-col-editor-right">
-                        <div className="radio-group d-flex gap-4">
-                            <div className="radio-option">
-                                <label htmlFor="wd-radio-question"
-                                       className="d-flex align-items-center">
-                                    {/* I got this part of the input from ChatGPT*/}
-                                    <input
-                                        type="radio"
-                                        name="radio-post-type"
-                                        id="wd-radio-question"
-                                        value="QUESTION"
-                                        checked={postType === "QUESTION"}
-                                        onChange={handleQuestionTypeChange}
-                                        className="me-2"
-                                    />
-                                    Question
-                                </label>
-                                <small className="ms-4">if you need an answer</small>
+                {type === "TYPICAL" && (
+                    <>
+                        <div
+                            id="wd-piazza-editor-post-type"
+                            className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
+                        >
+                            <div className="wd-grid-col-edit-right text-end me-3">
+                                Post Type*
                             </div>
+                            <div className="wd-grid-col-editor-right">
+                                <div className="radio-group d-flex gap-4">
+                                    <div className="radio-option">
+                                        <label htmlFor="wd-radio-question"
+                                               className="d-flex align-items-center">
+                                            {/* I got this part of the input from ChatGPT*/}
+                                            <input
+                                                type="radio"
+                                                name="radio-post-type"
+                                                id="wd-radio-question"
+                                                value="QUESTION"
+                                                checked={postType === "QUESTION"}
+                                                onChange={handleQuestionTypeChange}
+                                                className="me-2"
+                                            />
+                                            Question
+                                        </label>
+                                        <small className="ms-4">if you need an answer</small>
+                                    </div>
 
-                            <div className="radio-option">
-                                <label htmlFor="wd-radio-note"
-                                       className="d-flex align-items-center">
-                                    <input
-                                        type="radio"
-                                        name="radio-post-type"
-                                        id="wd-radio-note"
-                                        value="NOTE"
-                                        checked={postType === "NOTE"}
-                                        onChange={handleQuestionTypeChange}
-                                        className="me-2"
-                                    />
-                                    Note
-                                </label>
-                                <small className="ms-4">if you don’t need an answer</small>
+                                    <div className="radio-option">
+                                        <label htmlFor="wd-radio-note"
+                                               className="d-flex align-items-center">
+                                            <input
+                                                type="radio"
+                                                name="radio-post-type"
+                                                id="wd-radio-note"
+                                                value="NOTE"
+                                                checked={postType === "NOTE"}
+                                                onChange={handleQuestionTypeChange}
+                                                className="me-2"
+                                            />
+                                            Note
+                                        </label>
+                                        <small className="ms-4">if you don’t need an answer</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
-                <div
-                    id="wd-piazza-editor-post-type"
-                    className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
-                >
-                    <div className="wd-grid-col-edit-right text-end me-3">
-                        Post To*
-                    </div>
-                    <div className="wd-grid-col-editor-right">
-                        <div className="radio-group d-flex gap-4">
-                            <div className="radio-option">
-                                <label htmlFor="wd-radio-question"
-                                       className="d-flex align-items-center">
-                                    <input
-                                        type="radio"
-                                        name="radio-post-to"
-                                        id="wd-radio-post-to-all"
-                                        value="all"
-                                        checked={postToAll}
-                                        onChange={handlePostToChange}
-                                        className="me-2"
-                                    />
-                                    Entire Class
-                                </label>
+                        <div
+                            id="wd-piazza-editor-post-type"
+                            className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
+                        >
+                            <div className="wd-grid-col-edit-right text-end me-3">
+                                Post To*
                             </div>
-                            <div className="radio-option">
-                                <label htmlFor="wd-radio-note"
-                                       className="d-flex align-items-center">
-                                    <input
-                                        type="radio"
-                                        name="radio-post-to"
-                                        id="wd-radio-selected-individuals"
-                                        value="selected"
-                                        checked={!postToAll}
-                                        onChange={handlePostToChange}
-                                        className="me-2"
-                                    />
-                                    Individual Student(s)/Instructor(s)
-                                </label>
-                                {!postToAll && students.filter((s: any) => s !== null && s !== undefined).map((student: any) => (
-                                    <div key={student._id}
-                                         className="d-flex align-items-center mb-1">
-                                        <input
-                                            type="checkbox"
-                                            className="me-2"
-                                            checked={selectedStudents.includes(student._id)}
-                                            onChange={() => toggleStudent(student._id)}
-                                        />
-                                        {student.firstName} {student.lastName}
+                            <div className="wd-grid-col-editor-right">
+                                <div className="radio-group d-flex gap-4">
+                                    <div className="radio-option">
+                                        <label htmlFor="wd-radio-question"
+                                               className="d-flex align-items-center">
+                                            <input
+                                                type="radio"
+                                                name="radio-post-to"
+                                                id="wd-radio-post-to-all"
+                                                value="all"
+                                                checked={postToAll}
+                                                onChange={handlePostToChange}
+                                                className="me-2"
+                                            />
+                                            Entire Class
+                                        </label>
+                                    </div>
+                                    <div className="radio-option">
+                                        <label htmlFor="wd-radio-note"
+                                               className="d-flex align-items-center">
+                                            <input
+                                                type="radio"
+                                                name="radio-post-to"
+                                                id="wd-radio-selected-individuals"
+                                                value="selected"
+                                                checked={!postToAll}
+                                                onChange={handlePostToChange}
+                                                className="me-2"
+                                            />
+                                            Individual Student(s)/Instructor(s)
+                                        </label>
+                                        {!postToAll && students.filter((s: any) => s !== null && s !== undefined).map((student: any) => (
+                                            <div key={student._id}
+                                                 className="d-flex align-items-center mb-1">
+                                                <input
+                                                    type="checkbox"
+                                                    className="me-2"
+                                                    checked={selectedStudents.includes(student._id)}
+                                                    onChange={() => toggleStudent(student._id)}
+                                                />
+                                                {student.firstName} {student.lastName}
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            id="wd-piazza-editor-post-type"
+                            className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
+                        >
+                            <div className="wd-grid-col-edit-right text-end me-3">
+                                Select Folder(s)*
+                            </div>
+                            <div className="wd-grid-col-editor-right">
+                                {folders?.map((folder: any) => (
+                                    <div key={folder._id} style={{display: "inline-block"}}>
+                                        {selectedFolders.includes(folder._id) ? (
+                                            <div
+                                                className="me-2 folder-badge-active"
+                                                onClick={() => toggleFolder(folder._id)}
+                                                style={{cursor: "pointer"}}
+                                            >
+                                                {folder.name}
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="me-2 folder-badge"
+                                                onClick={() => toggleFolder(folder._id)}
+                                                style={{cursor: "pointer"}}
+                                            >
+                                                {folder.name}
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
-
                             </div>
                         </div>
-                    </div>
-                </div>
 
-
-                <div
-                    id="wd-piazza-editor-post-type"
-                    className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
-                >
-                    <div className="wd-grid-col-edit-right text-end me-3">
-                        Select Folder(s)*
-                    </div>
-                    <div className="wd-grid-col-editor-right">
-                        {folders?.map((folder: any) => (
-                            <div key={folder._id} style={{display: "inline-block"}}>
-                                {selectedFolders.includes(folder._id) ? (
-                                    <div
-                                        className="me-2 folder-badge-active"
-                                        onClick={() => toggleFolder(folder._id)}
-                                        style={{cursor: "pointer"}}
-                                    >
-                                        {folder.name}
-                                    </div>
-                                ) : (
-                                    <div
-                                        className="me-2 folder-badge"
-                                        onClick={() => toggleFolder(folder._id)}
-                                        style={{cursor: "pointer"}}
-                                    >
-                                        {folder.name}
-                                    </div>
-                                )}
+                        <div
+                            id="wd-piazza-editor-post-type"
+                            className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
+                        >
+                            <div className="wd-grid-col-edit-right text-end me-3">
+                                Summary*
                             </div>
-                        ))}
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="wd-piazza-editor-post-type"
-                    className="wd-flex-row-container wd-icon-align wd-gap wd-padding"
-                >
-                    <div className="wd-grid-col-edit-right text-end me-3">
-                        Summary*
-                    </div>
-                    <div className="wd-grid-col-editor-right">
-                        <div className="form-group mb-3">
-                            <input
-                                type="text"
-                                id="summary"
-                                name="summary"
-                                className="form-control"
-                                placeholder="Enter a one line summary, 100 characters or less"
-                                maxLength={100}
-                                value={summary}
-                                onChange={(e) => setSummary(e.target.value)}
-                            />
+                            <div className="wd-grid-col-editor-right">
+                                <div className="form-group mb-3">
+                                    <input
+                                        type="text"
+                                        id="summary"
+                                        name="summary"
+                                        className="form-control"
+                                        placeholder="Enter a one line summary, 100 characters or less"
+                                        maxLength={100}
+                                        value={summary}
+                                        onChange={(e) => setSummary(e.target.value)}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
+                    </>
+                )}
 
                 <div
                     id="wd-piazza-editor-post-type"
@@ -364,14 +409,25 @@ export default function PostEditor({ post }: { post: Post | null}) {
 
                     </div>
                     <div className="wd-grid-col-editor-right">
-                        <Button onClick={() => (post ? updateExistingPost() : createPost())} className="me-2">
+                        <Button onClick={() => (post ? updateExistingPost() : createPost())}
+                                className="me-2">
                             {post ? "Update " : "Submit "}
-                            My {postType === "QUESTION" ? "Question" : "Note"} to {cid?.slice(0, 8)}
+                            post to {cid?.slice(0, 8)}
                         </Button>
                         <Button variant="secondary"
-                                onClick={() => navigate(`/Kambaz/Courses/${cid}/Piazza/QA   `)}>
+                                onClick={() => {
+                                    if (onPostSubmit) onPostSubmit();
+                                    if (parentPost) {
+                                        navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
+                                    }  else if (post) {
+                                        navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${post._id}`);
+                                    } else {
+                                        navigate(`/Kambaz/Courses/${cid}/Piazza/`);
+                                    }
+                                }}>
                             Cancel
                         </Button>
+
                     </div>
                 </div>
             </div>

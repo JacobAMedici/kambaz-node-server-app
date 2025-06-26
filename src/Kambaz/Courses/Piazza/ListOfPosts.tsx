@@ -18,7 +18,7 @@ export default function ListOfPosts() {
         if (content) {
             // I didn't know how to do the filter here to make it so that it only shows posts in the selected folders, so I asked ChatGPT
             const filteredPosts = (await postClient.getPostsByContent(content, cid as string))
-                .filter((post: any) => selectedFolders.length === 0 || selectedFolders.includes(post.folderId));
+                .filter((post: any) => (selectedFolders.length === 0 || selectedFolders.includes(post.folderId)) && (post.type === "QUESTION" && post.type === "NOTE"));
 
             const sortedFilteredPosts = filteredPosts.sort(
                 (a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
@@ -44,18 +44,31 @@ export default function ListOfPosts() {
             filteredPosts.push(...posts);
         }
 
-        const sortedFilteredPosts = filteredPosts.sort((a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+        const visiblePosts = filteredPosts.filter((post: any) =>
+            post.type === "QUESTION" || post.type === "NOTE"
+        );
+
+        const sortedFilteredPosts = visiblePosts.sort(
+            (a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
+        );
 
         dispatch(setClassPosts(sortedFilteredPosts));
     };
 
-
     const filterPostsByCourseId = async () => {
-        const classPosts = await postClient.getPostsByCourseId(cid as string)
-        // I got this line from ChatGPT
-        const sortedPosts = classPosts.sort((a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+        const classPosts = await postClient.getPostsByCourseId(cid as string);
+
+        const visiblePosts = classPosts.filter((post: any) =>
+            post.type === "QUESTION" || post.type === "NOTE"
+        );
+
+        const sortedPosts = visiblePosts.sort(
+            (a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
+        );
+
         dispatch(setClassPosts(sortedPosts));
     };
+
 
     useEffect(() => {
         filterPostsByFolder();

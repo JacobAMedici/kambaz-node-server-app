@@ -72,7 +72,7 @@ and used in order to get the icon for the search bar inside of the box */
     color: white;
     padding: 0.5rem 1rem;
     z-index: 1000;
-    width: 85.1vw;
+    width: 84.3vw;
 }
 
 .wd-bg-color-gray {
@@ -387,5 +387,57 @@ and used in order to get the icon for the search bar inside of the box */
 .glance-content {
     display: flex;
     gap: 48px;
+}
+
+/* I got this CSS from ChatGPT */
+.status-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.status-icon.student {
+    background-color: #8bc34a; /* green */
+}
+
+.status-icon.info {
+    background-color: #ffb74d; /* orange */
+}
+
+.follow-up-response {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 6px 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.follow-up-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.follow-up-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.follow-up-content {
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+}
+
+.wd-piazza-view-post-add-to-conversation {
+    margin-top: 8px;
 }
 
