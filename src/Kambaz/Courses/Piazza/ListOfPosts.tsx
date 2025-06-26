@@ -18,7 +18,7 @@ export default function ListOfPosts() {
         if (content) {
             // I didn't know how to do the filter here to make it so that it only shows posts in the selected folders, so I asked ChatGPT
             const filteredPosts = (await postClient.getPostsByContent(content, cid as string))
-                .filter((post: any) => (selectedFolders.length === 0 || selectedFolders.includes(post.folderId)) && (post.type === "QUESTION" && post.type === "NOTE"));
+                .filter((post: any) => (selectedFolders.length === 0 || selectedFolders.includes(post.folderId)) && (post.type === "QUESTION" || post.type === "NOTE"));
 
             const sortedFilteredPosts = filteredPosts.sort(
                 (a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
@@ -44,9 +44,16 @@ export default function ListOfPosts() {
             filteredPosts.push(...posts);
         }
 
-        const visiblePosts = filteredPosts.filter((post: any) =>
-            post.type === "QUESTION" || post.type === "NOTE"
-        );
+        const seen = new Set();
+        const visiblePosts = filteredPosts.filter((post: any) => {
+            const isVisibleType = post.type === "QUESTION" || post.type === "NOTE";
+            const isDuplicate = seen.has(post._id);
+            if (!isDuplicate && isVisibleType) {
+                seen.add(post._id);
+                return true;
+            }
+            return false;
+        });
 
         const sortedFilteredPosts = visiblePosts.sort(
             (a: any, b: any) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
