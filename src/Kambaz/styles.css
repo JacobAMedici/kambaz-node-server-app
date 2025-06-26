@@ -441,3 +441,7 @@ and used in order to get the icon for the search bar inside of the box */
     margin-top: 8px;
 }
 
+.selected-post {
+    background-color: #dce0e4; /* light grey-blue highlight */
+}
+

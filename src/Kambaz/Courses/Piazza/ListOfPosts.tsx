@@ -9,6 +9,7 @@ import {setClassPosts} from "./postReducer.ts";
 
 export default function ListOfPosts() {
     const {posts} = useSelector((state: any) => state.postReducer);
+    const {pid} = useParams();
     const {selectedFolders} = useSelector((state: any) => state.folderReducer);
     const {cid} = useParams();
     const navigate = useNavigate();
@@ -162,7 +163,7 @@ export default function ListOfPosts() {
         }
         return (
             <div key={post._id}
-                 className="post-container"
+                 className={`post-container${pid === post._id ? " selected-post" : ""}`}
                  onClick={() => navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${post._id}`)}>
                 <div className="wd-grid-col-lop-left">
                     <div className="post-title post-title-row">{post.userRole === "FACULTY" &&

@@ -127,7 +127,7 @@ export default function PostEditor({
             onPostSubmit();
         }
         if (!parentPost) {
-            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${newPost._id}`);
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
         } else {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
         }
