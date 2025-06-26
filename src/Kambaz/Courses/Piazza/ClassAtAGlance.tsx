@@ -50,8 +50,11 @@ export default function ClassAtAGlance() {
     };
 
     const getUnreadCount = () => {
-        return userPosts.filter((post: any) => !post.readBy.includes(currentUser._id)).length;
-    }
+        return userPosts.filter(
+            (post: any) =>
+                post.user !== currentUser._id && !post.readBy.includes(currentUser._id)
+        ).length;
+    };
 
     const getUnansweredCount = () => {
         return userPosts.filter((post: any) => post.responses.length === 0 && post.type === "QUESTION").length;
