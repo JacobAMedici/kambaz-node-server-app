@@ -33,7 +33,7 @@ export default function Navigation() {
                     <div className="navbar-nav d-flex gap-4 align-items-center">
                         <span className="text-white fw-light small">
                             {/* I asked ChatGPT how to make it so this only shows the first few chars*/}
-                            {cid?.substring(0, 10)}
+                            {cid?.substring(0, 8)}
                         </span>
 
                         {["QA", "Resources", "Statistics"].map((item) => (
@@ -42,7 +42,7 @@ export default function Navigation() {
                                 to={`${base}/${item}`}
                                 className="nav-item nav-link text-white"
                                 // I originally had this so it set it to active, but changed my mind
-                                // and had ChatGOT show me how to make it underline instaed
+                                // and had ChatGOT show me how to make it underline instead
                                 style={({isActive}) => ({
                                     textDecoration: isActive ? "underline" : "none"
                                 })}

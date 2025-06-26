@@ -334,3 +334,58 @@ and used in order to get the icon for the search bar inside of the box */
     justify-content: space-between;
     transition: background-color 0.15s;
 }
+
+/* I got this CSS from ChatGPT */
+.class-glance-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    width: 65%;
+}
+
+.left-col {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 16px;
+}
+
+.check-item {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.right-col {
+    flex: 6;
+    display: flex;
+    padding-left: 16px;
+    gap: 8px;
+}
+
+.right-inner-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    color: #666;
+    font-size: 0.95rem;
+    width: 200%;
+}
+
+.value {
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.glance-content {
+    display: flex;
+    gap: 48px;
+}
+

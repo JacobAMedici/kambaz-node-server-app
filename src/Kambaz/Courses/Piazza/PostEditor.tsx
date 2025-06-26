@@ -6,12 +6,13 @@ import * as piazzaClient from "./client.ts";
 import {setFolders} from "./folderReducer.ts";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {addPost} from "./postReducer.ts";
+import {addPost, updatePost} from "./postReducer.ts";
 import {v4 as uuidv4} from "uuid";
+import type {Post} from "./ViewPost.tsx";
 
-export default function PostEditor() {
+export default function PostEditor({ post }: { post: Post | null}) {
     const {cid} = useParams();
-    const [students, setStudents] = useState<any[]>([]);
+    const [students, setStudents] = useState([]);
     const [postType, setPostType] = useState("QUESTION");
     const [postToAll, setPostToAll] = useState(true);
     const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
@@ -102,9 +103,48 @@ export default function PostEditor() {
         navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
     };
 
+    const updateExistingPost = async () => {
+        const missing = [];
+        if (selectedFolders.length === 0) missing.push("Folders");
+        if (!summary.trim()) missing.push("Summary");
+        if (!details.trim()) missing.push("Details");
+
+        if (missing.length > 0) {
+            setModalMessage(`Please complete the following required fields:\n ${missing.join(", ")}`);
+            setShowModal(true);
+            return;
+        }
+
+        const updated = {
+            ...post,
+            type: postType,
+            summary,
+            content: details,
+            folders: selectedFolders,
+            postTo: postToAll ? [] : [...selectedStudents, currentUser._id],
+        };
+
+        const result = await piazzaClient.updatePost(updated);
+        dispatch(updatePost(result));
+        navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
+    };
+
+
+    const setExistingPost = () => {
+        if (post) {
+            setPostType(post.type);
+            setSummary(post.summary);
+            setDetails(post.content);
+            setSelectedFolders(post.folders);
+            setPostToAll(post.postTo.length === 0);
+            setSelectedStudents(post.postTo.filter((s: string) => s !== currentUser._id));
+        }
+    }
+
     useEffect(() => {
         loadStudents();
         getFoldersAsync();
+        setExistingPost();
     }, [cid]);
 
 
@@ -285,6 +325,7 @@ export default function PostEditor() {
                                 className="form-control"
                                 placeholder="Enter a one line summary, 100 characters or less"
                                 maxLength={100}
+                                value={summary}
                                 onChange={(e) => setSummary(e.target.value)}
                             />
                         </div>
@@ -307,6 +348,7 @@ export default function PostEditor() {
                                 className="form-control"
                                 rows={5}
                                 placeholder="Enter details of your post here"
+                                value={details}
                                 onChange={(e) => setDetails(e.target.value)}
                             />
                         </div>
@@ -322,9 +364,9 @@ export default function PostEditor() {
 
                     </div>
                     <div className="wd-grid-col-editor-right">
-                        <Button onClick={() => createPost()} className="me-2">
-                            Submit
-                            My {postType === "QUESTION" ? "Question" : "Note"} to {cid?.slice(0, 10)}
+                        <Button onClick={() => (post ? updateExistingPost() : createPost())} className="me-2">
+                            {post ? "Update " : "Submit "}
+                            My {postType === "QUESTION" ? "Question" : "Note"} to {cid?.slice(0, 8)}
                         </Button>
                         <Button variant="secondary"
                                 onClick={() => navigate(`/Kambaz/Courses/${cid}/Piazza/QA   `)}>

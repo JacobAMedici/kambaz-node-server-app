@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {MdOutlineNotes} from "react-icons/md";
 import {BsFillQuestionSquareFill} from "react-icons/bs";
 import {deleteClassPost} from "./postReducer.ts";
+import PostEditor from "./PostEditor.tsx";
 
 export type Post = {
     _id: string;
@@ -27,6 +28,7 @@ export default function ViewPost() {
     const {pid, cid} = useParams();
     const [post, setPost] = useState<Post | null>(null);
     const [folderNames, setFolderNames] = useState<string[]>([]);
+    const [editing, setEditing] = useState(false);
     const navigate = useNavigate();
     const {currentUser} = useSelector((state: any) => state.accountReducer);
     const dispatch = useDispatch();
@@ -74,6 +76,55 @@ export default function ViewPost() {
     // I was having issues with crashing before loading, and asked ChatGPT, which told me to use this
     if (post === null) return <div>Loading...</div>;
 
+    const postViewer = () => {
+        return (
+            <div id="wd-piazza-view-post-body">
+                <div className="d-flex justify-content-between align-items-center">
+                    <h1>{post.summary}</h1>
+                    {/* This dropdown menu came from ChatGPT*/}
+                    {(currentUser._id === post.user || currentUser.role === "FACULTY") &&
+                        <div className="dropdown ms-auto">
+                            <button
+                                className="btn btn-sm btn-secondary dropdown-toggle"
+                                type="button"
+                                id="postActionsDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Actions
+                            </button>
+                            <ul className="dropdown-menu" aria-labelledby="postActionsDropdown">
+                                <li>
+                                    <button className="dropdown-item"
+                                            onClick={() => setEditing(!editing)}>Edit
+                                    </button>
+                                </li>
+                                <li>
+                                    <button className="dropdown-item text-danger"
+                                            onClick={() => deletePostAsync()}>Delete
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>}
+                </div>
+                <div className="wd-piazza-view-post-content">
+                    {post.content}
+                </div>
+                {folderNames.map((name, index) => (
+                    <span key={index} className="folder-badge me-2">
+                    {name}
+                </span>
+                ))}
+                <br/>
+                <br/>
+                <button className="btn btn-primary"
+                        onClick={() => setEditing(!editing)}>
+                    Edit
+                </button>
+            </div>
+        )
+    }
+
     return (
         <div id="wd-piazza-view-post" className="wd-piazza-view-post">
             <div className="piazza-post-header">
@@ -88,49 +139,7 @@ export default function ViewPost() {
                 </div>
                 <div className="piazza-views">{post.readBy.length} views</div>
             </div>
-
-            <div id="wd-piazza-view-post-body">
-                <div className="d-flex justify-content-between align-items-center">
-                    <h1>{post.summary}</h1>
-                    {/* This dropdown menu came from ChatGPT*/}
-                    <div className="dropdown ms-auto">
-                        <button
-                            className="btn btn-sm btn-secondary dropdown-toggle"
-                            type="button"
-                            id="postActionsDropdown"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            Actions
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby="postActionsDropdown">
-                            <li>
-                                <button className="dropdown-item">Edit
-                                </button>
-                            </li>
-                            <li>
-                                <button className="dropdown-item text-danger"
-                                        onClick={() => deletePostAsync()}>Delete
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="wd-piazza-view-post-content">
-                    {post.content}
-                </div>
-                {folderNames.map((name, index) => (
-                    <span key={index} className="folder-badge me-2">
-                    {name}
-                </span>
-                ))}
-                <br/>
-                <br/>
-                <button className="btn btn-primary"
-                        onClick={() => navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${pid}/Edit`)}>
-                    Edit
-                </button>
-            </div>
+            {editing ? <PostEditor post={post}/> : postViewer()}
             <div id="wd-piazza-view-post-student-answer">
             </div>
             <div id="wd-piazza-view-post-instructor-answer">

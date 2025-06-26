@@ -10,7 +10,7 @@ export default function Posts() {
         <div id="wd-piazza-posts">
             {pid ? (
                 pid === "New" ? (
-                    <PostEditor/>
+                    <PostEditor post={null}/>
                 ) : (
                     <ViewPost/>
                 )

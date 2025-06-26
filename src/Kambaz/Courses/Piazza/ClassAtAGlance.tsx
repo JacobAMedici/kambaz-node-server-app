@@ -1,7 +1,128 @@
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router";
+import * as postClient from "./client.ts";
+import {setClassPosts} from "./postReducer.ts";
+import {useEffect, useState} from "react";
+import {FaCheckSquare} from "react-icons/fa";
+import {BsExclamationSquareFill} from "react-icons/bs";
+import {findUsersForCourse} from "../client.ts";
+
+
 export default function ClassAtAGlance() {
+    const {posts} = useSelector((state: any) => state.postReducer);
+    const [allPosts, setAllPosts] = useState([]);
+    const {cid} = useParams();
+    const {currentUser} = useSelector((state: any) => state.accountReducer);
+    const dispatch = useDispatch();
+    const [numberofStudents, setNumberOfStudents] = useState(0);
+
+    const filterPostsByCourseId = async () => {
+        const classPosts = await postClient.getPostsByCourseId(cid as string);
+
+        setAllPosts(classPosts);
+
+        const visiblePosts = classPosts.filter(
+            (post: any) =>
+                (post.postTo.length === 0 || post.postTo.includes(currentUser._id)) &&
+                (post.type === "QUESTION" || post.type === "NOTE")
+        );
+
+        dispatch(setClassPosts(visiblePosts));
+    };
+
+
+    const getUnreadCount = () => {
+        return posts.filter((post: any) => !post.readBy.includes(currentUser._id)).length;
+    }
+
+    const getUnansweredCount = () => {
+        return posts.filter((post: any) => post.responses.length === 0 && post.type === "QUESTION").length;
+    }
+
+    const getNumberOfStudents = async () => {
+        const users = await findUsersForCourse(cid as string);
+        const students = users.filter((user: any) => user.role === "STUDENT");
+        setNumberOfStudents(students.length);
+    }
+
+    const getInstructorResponses = () => {
+        return allPosts.reduce((count: number, post: any) => {
+            return count + post.responses.filter((r: any) => r.userRole === "FACULTY").length;
+        }, 0);
+    };
+
+    const getStudentResponses = () => {
+        return allPosts.reduce((count: number, post: any) => {
+            return count + post.responses.filter((r: any) => r.userRole === "STUDENT").length;
+        }, 0);
+    };
+
+    useEffect(() => {
+        filterPostsByCourseId();
+        getNumberOfStudents();
+    }, []);
+
     return (
         <div id="wd-piazza-class-at-a-glance">
-            <h2>Class at a glance</h2>
+            <div className="class-glance-box">
+                <h2>Class at a Glance</h2>
+
+                <div className="glance-content">
+                    <div className="left-col">
+                        <div className="check-item">
+                            {
+                                getUnreadCount() === 0 ? (
+                                    <div className="me-2">
+                                        <FaCheckSquare size={25}
+                                                       className="wd-fg-color-green me-1"/>
+                                        no unread posts
+                                    </div>
+                                ) : (
+                                    <div className="me-2">
+                                        <BsExclamationSquareFill size={25}
+                                                                 className="wd-fg-color-red me-1"/>
+                                        {getUnreadCount()} unread posts
+                                    </div>
+                                )
+                            }
+
+                            {
+                                getUnansweredCount() === 0 ? (
+                                    <div className="me-2">
+                                        <FaCheckSquare size={25}
+                                                       className="wd-fg-color-green me-1"/>
+                                        no unanswered questions
+                                    </div>
+                                ) : (
+                                    <div className="me-2">
+                                        <BsExclamationSquareFill size={25}
+                                                                 className="wd-fg-color-red me-1"/>
+                                        {getUnansweredCount()} unanswered questions
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className="right-col">
+                        <div className="right-inner-col right-values">
+                            <div className="value">active instructor license</div>
+                            <div className="value">{posts.length}</div>
+                            <div className="value">{getInstructorResponses()}</div>
+                            <div className="value">{getStudentResponses()}</div>
+                            <div className="value">{numberofStudents}</div>
+                        </div>
+                        <div className="right-inner-col">
+                            <div className="label">license status</div>
+                            <div className="label">total posts</div>
+                            <div className="label">instructors' responses</div>
+                            <div className="label">students' responses</div>
+                            <div className="label">students enrolled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
+
+
 }
