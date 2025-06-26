@@ -185,7 +185,7 @@ export default function ViewPost() {
                 <div className="wd-piazza-view-post-content">
                     {post.content}
                 </div>
-                {folderNames.map((name, index) => (
+                {folderNames.length !== 0 && folderNames.map((name, index) => (
                     <span key={index} className="folder-badge me-2">
                     {name}
                 </span>
