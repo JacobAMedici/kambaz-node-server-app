@@ -171,7 +171,9 @@ export default function PostEditor({
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${postNavTo}`);
         } else if (parentPost && post?._id !== parentPost._id) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
-        } else if (!parentPost) {
+        } else if (post) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${post._id}`);
+        } else {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
         }
     };
