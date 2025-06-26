@@ -107,6 +107,19 @@ export default function ViewPost() {
         }
     };
 
+    const toggleResolvedStatus = async (responseId: string) => {
+        const response = responses.find(r => r._id === responseId);
+        if (!response) return;
+
+        const updatedResponse = {
+            ...response,
+            followUpClosed: !response.followUpClosed
+        };
+
+        await updatePost(updatedResponse as any);
+        setResponses(responses.map(r => r._id === responseId ? updatedResponse : r));
+    }
+
     const fetchUsers = async () => {
         const classUsers = await findUsersForCourse(cid as string);
         setUsers(classUsers);
@@ -373,11 +386,24 @@ export default function ViewPost() {
                     {responses.filter((response: any) => response.type === "FOLLOW_UP").map(
                         (response: any) => (
                             <div key={response._id} className="follow-up-response">
-                                <div className="follow-up-header d-flex justify-content-between align-items-center">
-                <span>
-                    {users.find(u => u._id === response.user)?.firstName || "Unknown"}{" "}
-                    {users.find(u => u._id === response.user)?.lastName || "User"}
-                </span>
+                                <div
+                                    className="follow-up-header d-flex justify-content-between align-items-center">
+                                        <span className="d-flex align-items-center gap-2">
+                                          {users.find(u => u._id === response.user)?.firstName || "Unknown"}{" "}
+                                            {users.find(u => u._id === response.user)?.lastName || "User"}
+
+                                            {response.followUpClosed ? (
+                                                <button className="btn btn-sm btn-outline-secondary"
+                                                        onClick={() => toggleResolvedStatus(response._id)}>
+                                                    Resolved
+                                                </button>
+                                            ) : (
+                                                <button className="btn btn-sm btn-outline-danger"
+                                                        onClick={() => toggleResolvedStatus(response._id)}>
+                                                    Unresolved
+                                                </button>
+                                            )}
+                                        </span>
                                     <div className="d-flex align-items-center gap-3">
                     <span className="follow-up-date">
                         {new Date(response.dateTime).toLocaleString()}
