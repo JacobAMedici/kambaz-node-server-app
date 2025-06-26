@@ -185,11 +185,14 @@ export default function ViewPost() {
                 <div className="wd-piazza-view-post-content">
                     {post.content}
                 </div>
-                {folderNames.length !== 0 && folderNames.map((name, index) => (
-                    <span key={index} className="folder-badge me-2">
-                    {name}
-                </span>
-                ))}
+                {folderNames
+                    .filter((name): name is string => !!name) // filter out falsy values before mapping
+                    .map((name, index) => (
+                        <span key={index} className="folder-badge me-2">
+                        {name}
+                    </span>
+                    ))}
+
                 <br/>
                 <br/>
                 {(currentUser._id === post.user || currentUser.role === "FACULTY") &&
