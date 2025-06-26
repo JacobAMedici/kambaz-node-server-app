@@ -7,7 +7,6 @@ import {FaCheckSquare} from "react-icons/fa";
 import {BsExclamationSquareFill} from "react-icons/bs";
 import {findUsersForCourse} from "../client.ts";
 
-
 export default function ClassAtAGlance() {
     const {userPosts} = useSelector((state: any) => state.postReducer);
     const [allPosts, setAllPosts] = useState([]);
@@ -16,12 +15,32 @@ export default function ClassAtAGlance() {
     const dispatch = useDispatch();
     const [numberOfStudents, setNumberOfStudents] = useState(0);
 
+    // I got this from ChatGPT
     const filterPostsByCourseId = async () => {
         const classPosts = await postClient.getPostsByCourseId(cid as string);
 
-        setAllPosts(classPosts);
+        // Get all response posts (flattened)
+        const responseIds = classPosts.flatMap((post: any) => post.responses);
+        const uniqueResponseIds = [...new Set(responseIds)];
 
-        const visiblePosts = classPosts.filter(
+        const fullResponses = await Promise.all(
+            (uniqueResponseIds as string[]).map((rid) => postClient.getPostsByPostId(rid))
+        );
+
+        // Map response ID to post object
+        const responseMap = new Map(fullResponses.map(r => [r._id, r]));
+
+        // Attach full response objects to each post
+        const postsWithResolvedResponses = classPosts.map((post: any) => ({
+            ...post,
+            responses: post.responses
+                .map((rid: string) => responseMap.get(rid))
+                .filter((r: any) => r !== undefined),
+        }));
+
+        setAllPosts(postsWithResolvedResponses);
+
+        const visiblePosts = postsWithResolvedResponses.filter(
             (post: any) =>
                 (post.postTo.length === 0 || post.postTo.includes(currentUser._id)) &&
                 (post.type === "QUESTION" || post.type === "NOTE")
@@ -29,7 +48,6 @@ export default function ClassAtAGlance() {
 
         dispatch(setUserPosts(visiblePosts));
     };
-
 
     const getUnreadCount = () => {
         return userPosts.filter((post: any) => !post.readBy.includes(currentUser._id)).length;
