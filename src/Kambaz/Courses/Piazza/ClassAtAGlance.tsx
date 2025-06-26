@@ -126,14 +126,12 @@ export default function ClassAtAGlance() {
                     </div>
                     <div className="right-col">
                         <div className="right-inner-col right-values">
-                            <div className="value">active instructor license</div>
                             <div className="value">{userPosts.length}</div>
                             <div className="value">{getInstructorResponses()}</div>
                             <div className="value">{getStudentResponses()}</div>
                             <div className="value">{numberOfStudents}</div>
                         </div>
                         <div className="right-inner-col">
-                            <div className="label">license status</div>
                             <div className="label">total posts</div>
                             <div className="label">instructors' responses</div>
                             <div className="label">students' responses</div>
