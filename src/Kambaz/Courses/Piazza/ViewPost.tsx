@@ -49,7 +49,8 @@ export default function ViewPost() {
     const [studentEditing, setStudentEditing] = useState(false);
     const [instructorEditing, setInstructorEditing] = useState(false);
     const [followUpEditing, setFollowUpEditing] = useState(false);
-    const [editingResponse, setEditingResponse] = useState(null);
+    const [editingResponse, setEditingResponse] = useState<string | null>(null);
+    const [followUpResponse, setFollowUpResponse] = useState(null);
     const [responses, setResponses] = useState<Post[]>([]);
     const navigate = useNavigate();
     const {currentUser} = useSelector((state: any) => state.accountReducer);
@@ -71,7 +72,6 @@ export default function ViewPost() {
         if (!result) {
             navigate(`/Kambaz/Courses/${cid}/Piazza`);
         } else {
-            // I didn't know how to make it so that it only adds if the user hasn't read it yet
             const newResult = {
                 ...result,
                 readBy: result.readBy.includes(currentUser._id)
@@ -82,18 +82,14 @@ export default function ViewPost() {
             await updatePost(newResult as any);
 
             const allFolders = await getFolders(cid as string);
-
-            // I got this from ChatGPT because I wasn't sure how to filter for this
             const matchedNames = result.folders
-                .map((fid: string) => {
-                    const match = allFolders.find((f: any) => f._id === fid);
-                    return match ? match.name : null;
-                })
+                .map((fid: string) => allFolders.find((f: any) => f._id === fid)?.name)
                 .filter((name: any): name is string => name !== null);
 
             setFolderNames(matchedNames);
 
-            const fullResponses = await Promise.all(
+            // Fetch top-level responses
+            const topResponses = await Promise.all(
                 newResult.responses.map(async (rid: string) => {
                     try {
                         return await getPostsByPostId(rid);
@@ -102,10 +98,32 @@ export default function ViewPost() {
                     }
                 })
             );
-            setResponses(fullResponses.filter((r): r is Post => r !== null));
 
+            // Fetch sub-responses
+            const allNestedResponseIds = topResponses
+                .filter((r): r is Post => r !== null)
+                .flatMap(r => r.responses);
+
+            const nestedResponses = await Promise.all(
+                allNestedResponseIds.map(async (rid: string) => {
+                    try {
+                        return await getPostsByPostId(rid);
+                    } catch {
+                        return null;
+                    }
+                })
+            );
+
+            // Combine and deduplicate
+            const allResponses = [
+                ...topResponses.filter((r): r is Post => r !== null),
+                ...nestedResponses.filter((r): r is Post => r !== null)
+            ];
+
+            setResponses(allResponses);
         }
     };
+
 
     const toggleResolvedStatus = async (responseId: string) => {
         const response = responses.find(r => r._id === responseId);
@@ -216,7 +234,8 @@ export default function ViewPost() {
                         {responses.filter((response: any) => response.type === "STUDENT_RESPONSE").map(
                             (response: any) => (
                                 <div key={response._id} className="follow-up-response">
-                                    <div className="follow-up-header d-flex justify-content-between align-items-center">
+                                    <div
+                                        className="follow-up-header d-flex justify-content-between align-items-center">
                 <span>
                     {users.find(u => u._id === response.user)?.firstName || "Unknown"}{" "}
                     {users.find(u => u._id === response.user)?.lastName || "User"}
@@ -447,12 +466,93 @@ export default function ViewPost() {
                                         parentPost={post}
                                         onPostSubmit={() => {
                                             fetchPost();
-                                            setFollowUpEditing(false);
                                             setEditingResponse(null);
                                         }}
                                     />
                                 ) : (
-                                    <div className="follow-up-content">{response.content}</div>
+                                    <div className="follow-up-content">{response.content} <br/>
+                                        {response.responses.map((respId: string) => {
+                                            const subResponse = responses.find(r => r._id === respId);
+                                            if (!subResponse) return null;
+
+                                            return (
+                                                <div key={subResponse._id}
+                                                     className="follow-up-response">
+                                                    <div
+                                                        className="follow-up-header d-flex justify-content-between align-items-center">
+                <span>
+                    {users.find(u => u._id === subResponse.user)?.firstName || "Unknown"}{" "}
+                    {users.find(u => u._id === subResponse.user)?.lastName || "User"}
+                </span>
+                                                        <div
+                                                            className="d-flex align-items-center gap-3">
+                    <span className="follow-up-date">
+                        {new Date(subResponse.dateTime).toLocaleString()}
+                    </span>
+                                                            {(currentUser._id === subResponse.user || currentUser.role === "FACULTY") && (
+                                                                <div className="dropdown">
+                                                                    <button
+                                                                        className="btn btn-sm btn-secondary dropdown-toggle"
+                                                                        type="button"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                        Actions
+                                                                    </button>
+                                                                    <ul className="dropdown-menu">
+                                                                        <li>
+                                                                            <button
+                                                                                className="dropdown-item"
+                                                                                onClick={() => setEditingResponse(subResponse._id)}
+                                                                            >
+                                                                                Edit
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button
+                                                                                className="dropdown-item text-danger"
+                                                                                onClick={() => deletePostAsync(subResponse._id)}
+                                                                            >
+                                                                                Delete
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    {editingResponse === subResponse._id ? (
+                                                        <PostEditor
+                                                            post={subResponse}
+                                                            type={"FOLLOW_UP_RESPONSE"}
+                                                            parentPost={response}
+                                                            postNavTo={post._id}
+                                                            onPostSubmit={() => {
+                                                                fetchPost();
+                                                                setEditingResponse(null);
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <div className="follow-up-content">
+                                                            {subResponse.content}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                        <button className="btn btn-sm"
+                                                onClick={() => setFollowUpResponse(response._id)}>
+                                            Add to this discussion
+                                        </button>
+                                        {followUpResponse === response._id && (
+                                            <PostEditor post={null} type={"FOLLOW_UP_RESPONSE"}
+                                                        parentPost={response} postNavTo={post._id}
+                                                        onPostSubmit={() => {
+                                                            fetchPost();
+                                                            setFollowUpResponse(null);
+                                                        }}/>
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         )
@@ -460,7 +560,7 @@ export default function ViewPost() {
 
                     <button className="btn btn-sm"
                             onClick={() => setFollowUpEditing(!followUpEditing)}>
-                        Add to this conversation
+                        Start a new Discussion
                     </button>
                     {followUpEditing && (
                         <PostEditor post={null} type={"FOLLOW_UP"} parentPost={post}

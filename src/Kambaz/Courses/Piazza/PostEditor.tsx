@@ -14,12 +14,14 @@ export default function PostEditor({
                                        post,
                                        type = "TYPICAL",
                                        parentPost = null,
-                                       onPostSubmit = () => null
+                                       onPostSubmit = () => null,
+                                       postNavTo = null
                                    }: {
     post: Post | null;
     type?: string;
     parentPost?: Post | null;
     onPostSubmit?: () => void;
+    postNavTo?: string | null;
 }) {
 
     const {cid} = useParams();
@@ -128,6 +130,8 @@ export default function PostEditor({
         }
         if (!parentPost) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
+        } else if (postNavTo) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${postNavTo}`);
         } else {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
         }
@@ -164,7 +168,9 @@ export default function PostEditor({
             onPostSubmit();
         }
         if (!parentPost) {
-            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${updated._id}`);
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
+        } else if (postNavTo) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${postNavTo}`);
         } else {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
         }
@@ -419,7 +425,7 @@ export default function PostEditor({
                                     if (onPostSubmit) onPostSubmit();
                                     if (parentPost) {
                                         navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
-                                    }  else if (post) {
+                                    } else if (post) {
                                         navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${post._id}`);
                                     } else {
                                         navigate(`/Kambaz/Courses/${cid}/Piazza/`);
