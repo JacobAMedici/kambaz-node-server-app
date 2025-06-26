@@ -14,7 +14,8 @@ const schema = new mongoose.Schema(
         postTo: [String],
         dateTime: Date,
         responses: [String],
-        readBy: [String]
+        readBy: [String],
+        followUpClosed: Boolean,
     },
     {collection: "posts"}
 );

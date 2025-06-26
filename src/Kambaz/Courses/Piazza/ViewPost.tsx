@@ -22,6 +22,7 @@ export type Post = {
     dateTime: Date;
     responses: string[];
     readBy: string[];
+    followUpClosed: boolean;
 };
 
 export type User = {
@@ -202,18 +203,65 @@ export default function ViewPost() {
                         {responses.filter((response: any) => response.type === "STUDENT_RESPONSE").map(
                             (response: any) => (
                                 <div key={response._id} className="follow-up-response">
-                                    <div className="follow-up-header">
-                                        <span>{users.find(u => u._id === response.user)?.firstName || "Unknown"} {users.find(u => u._id === response.user)?.lastName || "User"}</span>
-                                        <span className="follow-up-date">
-                                        {new Date(response.dateTime).toLocaleString()}
-                                    </span>
+                                    <div className="follow-up-header d-flex justify-content-between align-items-center">
+                <span>
+                    {users.find(u => u._id === response.user)?.firstName || "Unknown"}{" "}
+                    {users.find(u => u._id === response.user)?.lastName || "User"}
+                </span>
+                                        <div className="d-flex align-items-center gap-3">
+                    <span className="follow-up-date">
+                        {new Date(response.dateTime).toLocaleString()}
+                    </span>
+                                            {(currentUser._id === response.user || currentUser.role === "FACULTY") && (
+                                                <div className="dropdown">
+                                                    <button
+                                                        className="btn btn-sm btn-secondary dropdown-toggle"
+                                                        type="button"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
+                                                        Actions
+                                                    </button>
+                                                    <ul className="dropdown-menu">
+                                                        <li>
+                                                            <button
+                                                                className="dropdown-item"
+                                                                onClick={() => setEditingResponse(response._id)}
+                                                            >
+                                                                Edit
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                className="dropdown-item text-danger"
+                                                                onClick={() => deletePostAsync(response._id)}
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="follow-up-content">
-                                        {response.content}
-                                    </div>
+                                    {editingResponse === response._id ? (
+                                        <PostEditor
+                                            post={response}
+                                            type={"STUDENT_RESPONSE"}
+                                            parentPost={post}
+                                            onPostSubmit={() => {
+                                                fetchPost();
+                                                setStudentEditing(false);
+                                                setEditingResponse(null);
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="follow-up-content">{response.content}</div>
+                                    )}
                                 </div>
                             )
                         )}
+
                         <div className="wd-piazza-view-post-add-to-conversation">
                             {currentUser.role === "STUDENT" && (
                                 <>
@@ -253,7 +301,7 @@ export default function ViewPost() {
                                                 <span className="follow-up-date">
                                                     {new Date(response.dateTime).toLocaleString()}
                                                 </span>
-                                                {(currentUser._id === post.user || currentUser.role === "FACULTY") && (
+                                                {(currentUser._id === response.user || currentUser.role === "FACULTY") && (
                                                     <div className="dropdown">
                                                         <button
                                                             className="btn btn-sm btn-secondary dropdown-toggle"
@@ -325,18 +373,65 @@ export default function ViewPost() {
                     {responses.filter((response: any) => response.type === "FOLLOW_UP").map(
                         (response: any) => (
                             <div key={response._id} className="follow-up-response">
-                                <div className="follow-up-header">
-                                    <span>{users.find(u => u._id === response.user)?.firstName || "Unknown"} {users.find(u => u._id === response.user)?.lastName || "User"}</span>
-                                    <span className="follow-up-date">
-                                        {new Date(response.dateTime).toLocaleString()}
-                                    </span>
+                                <div className="follow-up-header d-flex justify-content-between align-items-center">
+                <span>
+                    {users.find(u => u._id === response.user)?.firstName || "Unknown"}{" "}
+                    {users.find(u => u._id === response.user)?.lastName || "User"}
+                </span>
+                                    <div className="d-flex align-items-center gap-3">
+                    <span className="follow-up-date">
+                        {new Date(response.dateTime).toLocaleString()}
+                    </span>
+                                        {(currentUser._id === response.user || currentUser.role === "FACULTY") && (
+                                            <div className="dropdown">
+                                                <button
+                                                    className="btn btn-sm btn-secondary dropdown-toggle"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false"
+                                                >
+                                                    Actions
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li>
+                                                        <button
+                                                            className="dropdown-item"
+                                                            onClick={() => setEditingResponse(response._id)}
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button
+                                                            className="dropdown-item text-danger"
+                                                            onClick={() => deletePostAsync(response._id)}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="follow-up-content">
-                                    {response.content}
-                                </div>
+                                {editingResponse === response._id ? (
+                                    <PostEditor
+                                        post={response}
+                                        type={"FOLLOW_UP"}
+                                        parentPost={post}
+                                        onPostSubmit={() => {
+                                            fetchPost();
+                                            setFollowUpEditing(false);
+                                            setEditingResponse(null);
+                                        }}
+                                    />
+                                ) : (
+                                    <div className="follow-up-content">{response.content}</div>
+                                )}
                             </div>
                         )
                     )}
+
                     <button className="btn btn-sm"
                             onClick={() => setFollowUpEditing(!followUpEditing)}>
                         Add to this conversation

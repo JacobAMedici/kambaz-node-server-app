@@ -1,10 +1,11 @@
 import {useNavigate} from "react-router-dom";
 import {FormControl} from "react-bootstrap";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import * as postClient from "./client.ts";
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {setClassPosts} from "./postReducer.ts";
+
 
 export default function ListOfPosts() {
     const {posts} = useSelector((state: any) => state.postReducer);
@@ -13,6 +14,53 @@ export default function ListOfPosts() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {currentUser} = useSelector((state: any) => state.accountReducer);
+    const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
+
+    const toggleSection = (section: string) => {
+        setCollapsedSections(prev => ({
+            ...prev,
+            [section]: !prev[section]
+        }));
+    };
+
+    // This function is from ChatGPT as this obviously was not covered in this class
+    function groupPostsByWeek(posts: any[]) {
+        const now = new Date();
+        const groups: { [key: string]: any[] } = {};
+
+        const getWeekRange = (date: Date) => {
+            const monday = new Date(date);
+            monday.setDate(date.getDate() - (date.getDay() === 0 ? 6 : date.getDay() - 1));
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+            return `${monday.getMonth() + 1}/${monday.getDate()} - ${sunday.getMonth() + 1}/${sunday.getDate()}`;
+        };
+
+        for (const post of posts) {
+            const dt = new Date(post.dateTime);
+            const deltaDays = Math.floor((now.getTime() - dt.getTime()) / (1000 * 60 * 60 * 24));
+
+            let label = getWeekRange(dt); // default
+            if (deltaDays === 0) label = "Today";
+            else if (deltaDays === 1) label = "Yesterday";
+            else if (deltaDays <= 7) label = "Last Week";
+
+            if (!groups[label]) groups[label] = [];
+            groups[label].push(post);
+        }
+
+        // Sort posts within each group by descending date
+        Object.keys(groups).forEach((label) => {
+            groups[label].sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
+        });
+
+        // Sort the group labels by the most recent post in each group
+        const sortedGroups = Object.entries(groups).sort(
+            (a, b) => new Date(b[1][0].dateTime).getTime() - new Date(a[1][0].dateTime).getTime()
+        );
+
+        return Object.fromEntries(sortedGroups);
+    }
 
     const filterPostsByContent = async (content: string) => {
         if (content) {
@@ -156,8 +204,30 @@ export default function ListOfPosts() {
                     </div>
                 </div>
             </div>
-            {posts?.map((post: any) => (
-                displayPost(post)
+            {/* This code is from ChatGPT*/}
+            {Object.entries(groupPostsByWeek(posts)).map(([section, sectionPosts]) => (
+                <div key={section}>
+                    <div
+                        onClick={() => toggleSection(section)}
+                        style={{
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                            backgroundColor: "#e9ecef",
+                            padding: "8px 12px",
+                            borderRadius: "4px",
+                            marginTop: "10px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "6px"
+                        }}
+                    >
+            <span style={{ fontSize: "0.85rem" }}>
+                {collapsedSections[section] ? "▸" : "▾"}
+            </span>
+                        <span>{section}</span>
+                    </div>
+                    {!collapsedSections[section] && sectionPosts.map((post: any) => displayPost(post))}
+                </div>
             ))}
         </div>
     );
