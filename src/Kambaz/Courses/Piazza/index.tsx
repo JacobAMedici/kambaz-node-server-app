@@ -7,10 +7,23 @@ import Statistics from "./InactiveRoutes/Statistics.tsx";
 
 export default function Piazza() {
     return (
-        <div id="wd-piazza">
-            <Navigation/>
+        // This CSS was a last minute addition that I got from ChatGPT, hence it being like this
+        <div id="wd-piazza" style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "86vh",
+            overflow: "hidden"
+        }}>
+            <div style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1000,
+                backgroundColor: "#3b6e8c"
+            }}>
+                <Navigation />
+            </div>
 
-            <div>
+            <div style={{ flex: 1, overflowY: "auto" }}>
                 <Routes>
                     <Route path="/" element={<Navigate to="QA"/>}/>
                     <Route path="QA" element={<QuestionAndAnswers/>}/>
