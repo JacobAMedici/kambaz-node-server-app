@@ -24,7 +24,7 @@ export default function ClassAtAGlance() {
         const uniqueResponseIds = [...new Set(responseIds)];
 
         const fullResponses = await Promise.all(
-            uniqueResponseIds.map((rid) => postClient.getPostsByPostId(rid))
+            uniqueResponseIds.map((rid) => postClient.getPostsByPostId(rid as any))
         );
 
         const validResponses = fullResponses.filter((r: any) => r !== null && r !== undefined);
@@ -131,7 +131,6 @@ export default function ClassAtAGlance() {
                                     (post: any) => post.type === "QUESTION" || post.type === "NOTE"
                                 ).length}
                             </div>
-
                             <div className="value">{getInstructorResponses()}</div>
                             <div className="value">{getStudentResponses()}</div>
                             <div className="value">{numberOfStudents}</div>
