@@ -1,0 +1,672 @@
+[{
+  "_id": "a9c9f20e-2813-42e0-8bd7-5c5b23e5fe97",
+  "name": "hw1",
+  "cid": "9facd440-a3cf-4673-957c-8746edd0d0fd",
+  "__v": 0
+},
+{
+  "_id": "34ba3799-1db1-4f5d-a68c-b4d7b03b50a2",
+  "name": "hw2",
+  "cid": "9facd440-a3cf-4673-957c-8746edd0d0fd",
+  "__v": 0
+},
+{
+  "_id": "c7aefe73-462a-4304-b3fb-7749bfbf65c7",
+  "name": "hw3",
+  "cid": "9facd440-a3cf-4673-957c-8746edd0d0fd",
+  "__v": 0
+},
+{
+  "_id": "df9a197e-664f-4b0d-b649-1f3d19e8fdc8",
+  "name": "exam",
+  "cid": "9facd440-a3cf-4673-957c-8746edd0d0fd",
+  "__v": 0
+},
+{
+  "_id": "e1d91b90-480e-47d4-97de-fb37ba47bff3",
+  "name": "hw1",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "86bd0d0b-cbcb-4886-9b8d-84f31aa1a686",
+  "name": "hw2",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "5d6a9e7e-0248-45a2-ae58-35a3b424d0fc",
+  "name": "hw3",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "441a0a8d-3776-450e-ba13-94d71bf29ab6",
+  "name": "hw4",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "b46eb16d-4af0-4c78-8cc3-5a683271e95b",
+  "name": "hw5",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "8dfa1a3b-1237-4ca6-b36a-1d6c3ecc9862",
+  "name": "hw6",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "83ff475b-17b6-4b58-b55a-b64b72445269",
+  "name": "exam1",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "3e74fe1d-674b-4dab-9b9b-6493871eb56e",
+  "name": "logistics",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "5dce9ba4-c970-4269-a155-e3fe4ecd9656",
+  "name": "office hours",
+  "cid": "RS100",
+  "__v": 0
+},
+{
+  "_id": "76a8439c-bde4-4437-9feb-8cfe7328dfb6",
+  "name": "hw1",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "76e82d6a-51f3-408b-a436-854684289a7a",
+  "name": "hw2",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "a58f5754-a03b-442e-a63b-40d638b3c5df",
+  "name": "hw3",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "79043b9a-27cd-4e03-882f-9b7cbf698e50",
+  "name": "hw4",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "593e3e84-bd7e-4a97-aafd-9ffeef01f95a",
+  "name": "hw5",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "dbbfdd6f-6a2a-4274-9ae1-a3620f8240ec",
+  "name": "hw6",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "37ba8d41-58d2-483d-b974-78a8c3a91955",
+  "name": "exam1",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "3fe1e173-41a6-46b9-9227-dac4607712f6",
+  "name": "logistics",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "1b00e102-d269-4212-b833-d04c3fdafb26",
+  "name": "office hours",
+  "cid": "RS101",
+  "__v": 0
+},
+{
+  "_id": "18397d1f-42ab-4e7a-9102-5ba37727229e",
+  "name": "hw1",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "3a9d20ab-af38-4b1a-bf99-6ff918b72d27",
+  "name": "hw2",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "dcd2ef44-4ca4-42ea-ab10-182d18cf3c13",
+  "name": "hw3",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "a02c4608-ede1-430d-8159-7c8c2ce1eea4",
+  "name": "hw4",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "be8699d6-7b34-4a90-9c40-30098546594d",
+  "name": "hw5",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "f5ab0cd7-3200-4dcf-93b2-db38ade39b2d",
+  "name": "hw6",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "23a1b16e-3542-471c-87b7-a076628d057e",
+  "name": "exam1",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "55cfb321-9e51-461d-94d1-07e2418ebd99",
+  "name": "logistics",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "59ab6776-f0b9-44d4-a22e-97b40b3124ec",
+  "name": "office hours",
+  "cid": "RS102",
+  "__v": 0
+},
+{
+  "_id": "f085c965-5102-4131-a90f-d732dbd1ff56",
+  "name": "hw1",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "adfbb0f4-c267-4a34-b114-6bce93329d44",
+  "name": "hw2",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "13607b1a-ac91-4b6f-941d-51cd3bb3ec0b",
+  "name": "hw3",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "a4bbbada-b003-4855-a6bf-f604a7ef38c9",
+  "name": "hw4",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "a4c02811-cdd6-4886-891d-d3b26c6981d7",
+  "name": "hw5",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "06b8b767-6a6c-4e6a-ad80-8e70dfbe47c3",
+  "name": "hw6",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "c83e5e66-239c-4e14-bd5f-8fe9236d2344",
+  "name": "exam1",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "1131f47f-2d2b-4593-80c2-b262fbe34620",
+  "name": "logistics",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "52c7d85b-1b2d-4c75-b76f-96205d556b14",
+  "name": "office hours",
+  "cid": "RS103",
+  "__v": 0
+},
+{
+  "_id": "ce73755e-0b7f-42ca-975f-ba8bc1c4b6da",
+  "name": "hw1",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "9315b882-1dc0-4bf2-8232-ae7a33eb123b",
+  "name": "hw2",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "ed3e9352-3c82-4655-b6ca-5b4d5eddd294",
+  "name": "hw3",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "6064f0ff-5492-4088-aaee-b4a79797f483",
+  "name": "hw4",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "0a619c07-9b6b-4cd4-b8f9-4b71bb8b017b",
+  "name": "hw5",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "fea9e3c2-5720-4f5a-b45a-1feabe84cccd",
+  "name": "hw6",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "16b989cd-5b7c-4965-896a-512a5b11bdc1",
+  "name": "exam1",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "acfb1a3c-ce28-4202-b8fc-041e16a6f625",
+  "name": "logistics",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "bcc8a8e7-f0c8-4db1-8304-b9aa89d5bc94",
+  "name": "office hours",
+  "cid": "RS104",
+  "__v": 0
+},
+{
+  "_id": "aaf9f2c7-91c8-48a2-9687-cf4e0105d772",
+  "name": "hw1",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "0c6272c1-3156-4a03-9faf-2eebb273499d",
+  "name": "hw2",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "5c67589f-b30f-4420-953b-3d29549915fd",
+  "name": "hw3",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "66d0070a-b685-49f9-8ada-ef5e6aac76cd",
+  "name": "hw4",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "4e711d0c-6d3d-424c-adc9-add98887fff0",
+  "name": "hw5",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "668fd5ce-cd09-42d7-ae5b-dfcc7b07587f",
+  "name": "hw6",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "bb4f660e-e17f-4842-8789-f23b28b80576",
+  "name": "exam1",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "eeea6b99-36d5-4544-829b-b30cfd9aa2ff",
+  "name": "logistics",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "a2629640-cc63-4305-b9e4-67ee7d869c76",
+  "name": "office hours",
+  "cid": "RS105",
+  "__v": 0
+},
+{
+  "_id": "3fba2317-e2cc-4ada-b732-680118c05f12",
+  "name": "hw1",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "2acdcb0b-8dc2-4dd8-a762-74d3037887d8",
+  "name": "hw2",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "4c32fac9-c787-4d78-b94f-f1e18ab91173",
+  "name": "hw3",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "bdd5716e-83be-4bf9-9426-24b3402106d3",
+  "name": "hw4",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "9cf71c00-b44b-4dc9-8e94-ce67b5881a50",
+  "name": "hw5",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "21e2b1ca-c2c0-4c02-8f9c-12fe39486b0d",
+  "name": "hw6",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "bfffda64-5f7b-439f-a4c5-1dc8cb1f1bda",
+  "name": "exam1",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "dfa382a2-73ac-4109-8043-89b8525c6e92",
+  "name": "logistics",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "9b2900ba-635a-48d1-ac86-a8de494c729e",
+  "name": "office hours",
+  "cid": "RS106",
+  "__v": 0
+},
+{
+  "_id": "762b7f36-2b63-42b6-89af-042908273613",
+  "name": "hw1",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "abe51860-842a-4443-b2d0-eda073b793ea",
+  "name": "hw2",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "0803f85c-d79e-4078-be86-2836bc2f5116",
+  "name": "hw3",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "6a6afd15-6707-4639-8550-b6af5d19f606",
+  "name": "hw4",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "d0da19ac-b2cd-4369-aafa-3e7612a4cb75",
+  "name": "hw5",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "6116cfbc-c11f-4d9d-b9d2-770593df1619",
+  "name": "hw6",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "870a984c-e57b-4fc8-935b-832e719a484a",
+  "name": "exam1",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "15236a30-767a-415b-83b1-caf35b43589f",
+  "name": "logistics",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "eb8f9341-197b-4cbc-9d30-77bb00009ba6",
+  "name": "office hours",
+  "cid": "RS107",
+  "__v": 0
+},
+{
+  "_id": "1a9c9cdc-c7d1-490f-9967-8983c4b78ab3",
+  "name": "hw1",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "0b2bb3eb-bee7-4c47-bf85-3dd345301adb",
+  "name": "hw2",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "349305e4-510a-471d-96d0-d2823aacc11c",
+  "name": "hw3",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "5138e93c-fcb0-49df-a56d-cfe0ef3327a5",
+  "name": "hw4",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "90c063b4-47a4-4c2f-8a5e-6f5b9d9cebb6",
+  "name": "hw5",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "7269d5d6-5867-4a75-a8c6-bbe81aa7ea98",
+  "name": "hw6",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "6097d825-752f-4e12-8992-d2c9499d0d26",
+  "name": "exam1",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "18e65e5a-c7ff-4890-9a0e-3a60031fe926",
+  "name": "logistics",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "561760c4-4a42-4519-85dc-47dd9ff168a7",
+  "name": "office hours",
+  "cid": "RS108",
+  "__v": 0
+},
+{
+  "_id": "43090326-0646-4529-9274-2c0602733d5c",
+  "name": "hw1",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "c00f73b3-e754-4ff6-b429-99840fd5a099",
+  "name": "hw2",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "724204af-8201-440d-b049-9cf91e6a7ddf",
+  "name": "hw3",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "7f89d085-ec01-4bc2-ac86-470297b32af7",
+  "name": "hw4",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "ba2c84b8-a67b-411a-aab8-be36b9cf8a83",
+  "name": "hw5",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "0e93d1f9-1bd6-4e9b-aee9-9852c81866f6",
+  "name": "hw6",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "258ca930-34ae-4085-8fa8-74eeee248d15",
+  "name": "exam1",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "b015852e-c5dc-4400-a8cb-077d277f09eb",
+  "name": "logistics",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "8c0dccd9-5acf-4876-9b64-8dfc040ff826",
+  "name": "office hours",
+  "cid": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "__v": 0
+},
+{
+  "_id": "56e5b7ac-1e7d-4a62-8c58-a3c8512a0b88",
+  "name": "hw1",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "536c1161-5088-4bc0-9104-4e7d47b89550",
+  "name": "hw2",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "5cd71bbe-d485-4026-9214-f5ea42d71b53",
+  "name": "hw3",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "86d7e6ab-bb9b-46a8-b911-27b34e0ca5ce",
+  "name": "hw4",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "de9f9183-7d24-488c-9861-0a38f69f2845",
+  "name": "hw5",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "0292ecf6-8d59-4181-b7d5-7988f1d5fad1",
+  "name": "hw6",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "6db5efbc-fa00-4ba5-8912-304fda9d826b",
+  "name": "exam1",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "1f57222b-3ed5-44c2-b85b-da0350140179",
+  "name": "logistics",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "b684e09d-8c57-43c2-a1f1-083ba453a737",
+  "name": "office hours",
+  "cid": "0543e31d-3d70-4fe8-a3c7-a9f51cc0844c",
+  "__v": 0
+},
+{
+  "_id": "2cfe5c43-e191-475d-a457-ca4f620c7545",
+  "name": "hw1",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "8c4eacd1-0b9c-4b37-8c1e-fb04f14a11c9",
+  "name": "hw2",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "34bff481-7692-43f2-8f66-068e8d17ff4a",
+  "name": "hw3",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "8cb1552c-ce07-40dc-b9e0-c4be203f9c9c",
+  "name": "hw4",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "b35652f2-b9b8-44f0-939d-71996dd5220c",
+  "name": "hw5",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "c852fe03-42d0-4b7f-989c-02322d993fa3",
+  "name": "hw6",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "b6f1beed-ef63-4130-b407-b6c4201efe43",
+  "name": "exam1",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "25821dfc-8ab8-473a-9aa4-6455efdfd5a2",
+  "name": "logistics",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+},
+{
+  "_id": "bbdfdb30-2ae3-40cd-ad5b-08211088da50",
+  "name": "office hours",
+  "cid": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "__v": 0
+}]

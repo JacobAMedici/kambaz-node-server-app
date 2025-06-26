@@ -224,12 +224,12 @@ and used in order to get the icon for the search bar inside of the box */
 }
 
 .wd-grid-col-lop-left {
-    width: 85%;
+    width: 80%;
     float: left;
 }
 
 .wd-grid-col-lop-right {
-    width: 15%;
+    width: 20%;
     float: left;
 }
 

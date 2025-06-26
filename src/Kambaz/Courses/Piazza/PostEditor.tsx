@@ -164,7 +164,7 @@ export default function PostEditor({
             onPostSubmit();
         }
         if (!parentPost) {
-            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${result._id}`);
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${updated._id}`);
         } else {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
         }

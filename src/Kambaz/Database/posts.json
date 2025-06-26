@@ -1,0 +1,450 @@
+[{
+  "_id": "6a614759-421b-432e-b43c-551d95715115",
+  "type": "QUESTION",
+  "summary": "Homework One",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "Homework One",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [
+    "2cfe5c43-e191-475d-a457-ca4f620c7545"
+  ],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-25T11:00:26.258Z"
+  },
+  "responses": [
+    "a68c67d4-5102-4fe5-a4f3-0d385749fbbc",
+    "6433fb6c-a96f-4e1a-8286-04ca5136e35e",
+    "54590c08-b5c1-4e5e-b9c1-e8f42dcb58f3",
+    "f84b52b8-0b85-48ca-aff5-ac140f99ca64"
+  ],
+  "readBy": [
+    "2",
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "__v": 0
+},
+{
+  "_id": "c5043eb7-2d51-4ef1-a165-36c32b04b8c1",
+  "type": "QUESTION",
+  "summary": "Homework 2 Issue",
+  "user": "2",
+  "userRole": "STUDENT",
+  "content": "I am having a hard time with homework 2. Can anybody help?",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [
+    "8c4eacd1-0b9c-4b37-8c1e-fb04f14a11c9"
+  ],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-25T11:01:08.932Z"
+  },
+  "responses": [
+    "74059e7c-2150-4600-a31f-644aec3464d2",
+    "962e94f6-a720-46a4-9a53-d754967cfd9b"
+  ],
+  "readBy": [
+    "2",
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "__v": 0
+},
+{
+  "_id": "67b978ac-2553-4dc1-bf2c-e964d1a949bf",
+  "type": "NOTE",
+  "summary": "Homework Three Is Dropped!",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "Homework Three Is Dropped!\nHomework Three Is Dropped!\nHomework Three Is Dropped!",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [
+    "34bff481-7692-43f2-8f66-068e8d17ff4a"
+  ],
+  "postTo": [
+    "2",
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "dateTime": {
+    "$date": "2025-06-25T21:49:24.610Z"
+  },
+  "responses": [
+    "00149d66-4ea0-4fbf-a699-8d85a3158fe5",
+    "f705ddb8-4022-4c41-a288-a12e1beedd8c",
+    "1882468b-47eb-496e-a1d5-b2a45ed92992"
+  ],
+  "readBy": [
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+    "2"
+  ],
+  "__v": 0
+},
+{
+  "_id": "6fde37aa-7028-49bc-b50a-338e42be81c7",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfadsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T01:59:05.362Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "ff9d8086-60ea-44fa-92bc-f63eb93a2b3e",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdfdas",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T01:59:37.690Z"
+  },
+  "responses": [],
+  "readBy": [
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "__v": 0
+},
+{
+  "_id": "090e2756-6d10-421f-9de0-d52082d12129",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdfd",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:32:20.662Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "98096836-e606-4a7f-b626-912849f2ac52",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfd",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:37:50.202Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "60d35851-8a92-4196-86b0-bb603750ffee",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfdas",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:39:06.069Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "00149d66-4ea0-4fbf-a699-8d85a3158fe5",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfdas",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:39:06.780Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "9ae9c37d-5a2e-4aed-a97b-16bb0ed6caa6",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:39:14.537Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "2431832c-7f67-41b2-9a00-d2f97a4e37c8",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:39:28.141Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "f705ddb8-4022-4c41-a288-a12e1beedd8c",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:39:29.970Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "a68c67d4-5102-4fe5-a4f3-0d385749fbbc",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:40:44.403Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "5aa47557-52dc-4bd4-934a-7eac86287a3b",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "asdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:41:10.564Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "6433fb6c-a96f-4e1a-8286-04ca5136e35e",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfadsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:41:11.433Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "042c1f2b-fa2b-40ec-97a0-4b4e8c9a698b",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfasdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:47:40.174Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "1882468b-47eb-496e-a1d5-b2a45ed92992",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsfasdf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:47:40.785Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "11c55185-01d4-43a0-8820-a6f046922748",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:52:14.781Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "74059e7c-2150-4600-a31f-644aec3464d2",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:52:15.203Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "54590c08-b5c1-4e5e-b9c1-e8f42dcb58f3",
+  "type": "INSTRUCTOR_RESPONSE",
+  "summary": "",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "adfads",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T02:52:34.419Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "962e94f6-a720-46a4-9a53-d754967cfd9b",
+  "type": "STUDENT_RESPONSE",
+  "summary": "",
+  "user": "2",
+  "userRole": "STUDENT",
+  "content": "sdfadsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T03:05:09.211Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "f84b52b8-0b85-48ca-aff5-ac140f99ca64",
+  "type": "FOLLOW_UP",
+  "summary": "",
+  "user": "2",
+  "userRole": "STUDENT",
+  "content": "asdfadsf",
+  "courseId": "843b4a20-43e2-4619-ad5b-58de910cbbb3",
+  "folders": [],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T03:05:16.149Z"
+  },
+  "responses": [],
+  "readBy": [],
+  "__v": 0
+},
+{
+  "_id": "b8c4b034-6009-4ea2-aa61-44e7f209c51b",
+  "type": "QUESTION",
+  "summary": "Newer Post",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "Newer Post",
+  "courseId": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "folders": [
+    "43090326-0646-4529-9274-2c0602733d5c",
+    "c00f73b3-e754-4ff6-b429-99840fd5a099"
+  ],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T03:36:37.758Z"
+  },
+  "responses": [],
+  "readBy": [
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "__v": 0
+},
+{
+  "_id": "21eec835-9be7-409c-95af-b36273abeced",
+  "type": "QUESTION",
+  "summary": "Newest Post",
+  "user": "c1ace5f9-b42e-47af-80e3-ecad9057622c",
+  "userRole": "FACULTY",
+  "content": "Newest Post",
+  "courseId": "1eab1ba6-af8e-4ebf-8da6-2bca8cd7b953",
+  "folders": [
+    "43090326-0646-4529-9274-2c0602733d5c"
+  ],
+  "postTo": [],
+  "dateTime": {
+    "$date": "2025-06-26T03:37:32.723Z"
+  },
+  "responses": [],
+  "readBy": [
+    "c1ace5f9-b42e-47af-80e3-ecad9057622c"
+  ],
+  "__v": 0
+}]
