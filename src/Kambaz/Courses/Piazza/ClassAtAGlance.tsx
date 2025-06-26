@@ -24,11 +24,12 @@ export default function ClassAtAGlance() {
         const uniqueResponseIds = [...new Set(responseIds)];
 
         const fullResponses = await Promise.all(
-            (uniqueResponseIds as string[]).map((rid) => postClient.getPostsByPostId(rid))
+            uniqueResponseIds.map((rid) => postClient.getPostsByPostId(rid))
         );
 
-        // Map response ID to post object
-        const responseMap = new Map(fullResponses.map(r => [r._id, r]));
+        const validResponses = fullResponses.filter((r: any) => r !== null && r !== undefined);
+
+        const responseMap = new Map(validResponses.map(r => [r._id, r]));
 
         // Attach full response objects to each post
         const postsWithResolvedResponses = classPosts.map((post: any) => ({
@@ -67,16 +68,15 @@ export default function ClassAtAGlance() {
     }
 
     const getInstructorResponses = () => {
-        return allPosts.reduce((count: number, post: any) => {
-            return count + post.responses.filter((r: any) => r.userRole === "FACULTY").length;
-        }, 0);
+        const allResponses = allPosts.flatMap((post: any) => post.responses);
+        return allResponses.filter((r: any) => r?.userRole === "FACULTY").length;
     };
 
     const getStudentResponses = () => {
-        return allPosts.reduce((count: number, post: any) => {
-            return count + post.responses.filter((r: any) => r.userRole === "STUDENT").length;
-        }, 0);
+        const allResponses = allPosts.flatMap((post: any) => post.responses);
+        return allResponses.filter((r: any) => r?.userRole === "STUDENT").length;
     };
+
 
     useEffect(() => {
         filterPostsByCourseId();
@@ -126,7 +126,12 @@ export default function ClassAtAGlance() {
                     </div>
                     <div className="right-col">
                         <div className="right-inner-col right-values">
-                            <div className="value">{userPosts.length}</div>
+                            <div className="value">
+                                {allPosts.filter(
+                                    (post: any) => post.type === "QUESTION" || post.type === "NOTE"
+                                ).length}
+                            </div>
+
                             <div className="value">{getInstructorResponses()}</div>
                             <div className="value">{getStudentResponses()}</div>
                             <div className="value">{numberOfStudents}</div>
@@ -142,6 +147,4 @@ export default function ClassAtAGlance() {
             </div>
         </div>
     );
-
-
 }
