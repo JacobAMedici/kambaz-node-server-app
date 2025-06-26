@@ -128,12 +128,12 @@ export default function PostEditor({
         if (onPostSubmit) {
             onPostSubmit();
         }
-        if (!parentPost) {
-            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
-        } else if (postNavTo) {
+        if (postNavTo) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${postNavTo}`);
-        } else {
+        } else if (parentPost && post?._id !== parentPost._id) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
+        } else if (!parentPost) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
         }
     };
 
@@ -167,12 +167,12 @@ export default function PostEditor({
         if (onPostSubmit) {
             onPostSubmit();
         }
-        if (!parentPost) {
-            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
-        } else if (postNavTo) {
+        if (postNavTo) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${postNavTo}`);
-        } else {
+        } else if (parentPost && post?._id !== parentPost._id) {
             navigate(`/Kambaz/Courses/${cid}/Piazza/QA/Post/${parentPost._id}`);
+        } else if (!parentPost) {
+            navigate(`/Kambaz/Courses/${cid}/Piazza/QA`);
         }
     };
 
